@@ -5,14 +5,22 @@ type ResponseStatus struct {
 	Description string `json:"description"`
 }
 
-type ResponseBase struct {
-	query   interface{}
-	status  ResponseStatus
-	results any
+type RajaongkirResponse[T any] struct {
+	Query   any            `json:"query"`
+	Status  ResponseStatus `json:"status"`
+	Results T              `json:"results"`
 }
 
-func (r ResponseBase) GetResults() any {
-	return r.results
+type ResponseBase[T any] struct {
+	Rajaongkir RajaongkirResponse[T] `json:"rajaongkir"`
+}
+
+func (r ResponseBase[T]) GetResults() T {
+	return r.Rajaongkir.Results
+}
+
+func (r ResponseBase[T]) GetStatus() ResponseStatus {
+	return r.Rajaongkir.Status
 }
 
 type Province struct {
@@ -21,12 +29,7 @@ type Province struct {
 }
 
 type ResponseProvinces struct {
-	ResponseBase
-	results []Province
-}
-
-func (p ResponseProvinces) GetResults() any {
-	return p.results
+	ResponseBase[[]Province]
 }
 
 type City struct {
@@ -38,10 +41,5 @@ type City struct {
 }
 
 type ResponseCities struct {
-	ResponseBase
-	results []City
-}
-
-func (p ResponseCities) GetResults() any {
-	return p.results
+	ResponseBase[[]City]
 }

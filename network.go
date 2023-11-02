@@ -8,11 +8,20 @@ import (
 	"net/url"
 )
 
-func sendGetRequest(url string) ([]byte, error) {
-	resp, err := http.Get(url)
+func sendGetRequest(url string, headers map[string]string) ([]byte, error) {
+	req, err := http.NewRequest("GET", url, nil)
+	if headers != nil {
+		for key, value := range headers {
+			req.Header.Set(key, value)
+		}
+	}
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
 	if err != nil {
 		return []byte{}, err
 	}
+
 	defer resp.Body.Close()
 
 	data, err := io.ReadAll(resp.Body)
@@ -23,7 +32,7 @@ func sendGetRequest(url string) ([]byte, error) {
 	return data, nil
 }
 
-func get[T interface{}](baseUrl string, endpoint string, values url.Values) (res T, err error) {
+func get[T interface{}](baseUrl string, endpoint string, headers map[string]string, values url.Values) (res T, err error) {
 	url, err := url.JoinPath(baseUrl, endpoint)
 	if err != nil {
 		return res, err
@@ -35,7 +44,7 @@ func get[T interface{}](baseUrl string, endpoint string, values url.Values) (res
 		}
 	}
 
-	cnt, err := sendGetRequest(url)
+	cnt, err := sendGetRequest(url, headers)
 	if err != nil {
 		return res, err
 	}
@@ -43,5 +52,6 @@ func get[T interface{}](baseUrl string, endpoint string, values url.Values) (res
 	if err = json.Unmarshal(cnt, &res); err != nil {
 		return
 	}
+
 	return
 }
