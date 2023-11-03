@@ -55,4 +55,4 @@ func main() {
 ## Contributors
 * Agung Yuliyanto: [Github](https://github.com/agung96tm), [LinkedIn](https://www.linkedin.com/in/agung96tm/)
 
-Hey you! Interest become contribtors? Then make issue or PR :)
+Hey you! Interest become contributor? Then make issue or PR :)
