@@ -1,45 +1,58 @@
 package rajaongkir_go
 
+import (
+	"encoding/json"
+	"errors"
+)
+
 type ResponseStatus struct {
 	Code        uint   `json:"code"`
 	Description string `json:"description"`
 }
 
-type RajaongkirResponse[T any] struct {
-	Query   any            `json:"query"`
+type ResponseBase[T interface{}, P interface{}] struct {
+	Query   P              `json:"query"`
 	Status  ResponseStatus `json:"status"`
-	Results T              `json:"results"`
+	Results []T            `json:"results"`
 }
 
-type ResponseBase[T any] struct {
-	Rajaongkir RajaongkirResponse[T] `json:"rajaongkir"`
-}
+func (b *ResponseBase[T, P]) Unmarshal(v []byte) error {
+	var rawResp map[string]json.RawMessage
+	_ = json.Unmarshal(v, &rawResp)
 
-func (r ResponseBase[T]) GetResults() T {
-	return r.Rajaongkir.Results
-}
+	if err := json.Unmarshal(rawResp["rajaongkir"], &b); err != nil {
+		var rawNested map[string]map[string]json.RawMessage
+		_ = json.Unmarshal(v, &rawNested)
 
-func (r ResponseBase[T]) GetStatus() ResponseStatus {
-	return r.Rajaongkir.Status
+		// Problem because results obj instead of list obj, then transform it
+		var result T
+		if err := json.Unmarshal(rawNested["rajaongkir"]["results"], &result); err == nil {
+			b.Results = []T{result}
+		} else {
+			return errors.New("fail to parse json")
+		}
+	}
+
+	return nil
 }
 
 type Province struct {
-	ProvinceID int `json:"province_id"`
-	Province   int `json:"province"`
+	ProvinceID string `json:"province_id"`
+	Province   string `json:"province"`
 }
 
 type ResponseProvinces struct {
-	ResponseBase[[]Province]
+	ResponseBase[Province, ProvinceParams]
 }
 
 type City struct {
-	CityID     int    `json:"city_id"`
+	CityID     string `json:"city_id"`
 	City       string `json:"city_name"`
-	ProvinceID int    `json:"province_id"`
+	ProvinceID string `json:"province_id"`
 	Province   string `json:"province"`
 	PostalCode string `json:"postal_code"`
 }
 
 type ResponseCities struct {
-	ResponseBase[[]City]
+	ResponseBase[City, CityParams]
 }

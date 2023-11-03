@@ -11,9 +11,29 @@ func NewAPI(config Config) API {
 }
 
 func (a API) GetProvinces(opts *ProvinceParams) (ResponseProvinces, error) {
-	return get[ResponseProvinces](a.config.BaseUrl, "province", a.config.Header, urlValues(opts))
+	var respProv ResponseProvinces
+
+	respByte, err := get(a.config.BaseUrl, "province", a.config.Header, urlValues(opts))
+	if err != nil {
+		return respProv, err
+	}
+
+	if err := respProv.Unmarshal(respByte); err != nil {
+		return respProv, err
+	}
+	return respProv, nil
 }
 
 func (a API) GetCities(opts *CityParams) (ResponseCities, error) {
-	return get[ResponseCities](a.config.BaseUrl, "city", a.config.Header, urlValues(opts))
+	var respCities ResponseCities
+
+	respByte, err := get(a.config.BaseUrl, "city", a.config.Header, urlValues(opts))
+	if err != nil {
+		return respCities, err
+	}
+
+	if err := respCities.Unmarshal(respByte); err != nil {
+		return respCities, err
+	}
+	return respCities, nil
 }

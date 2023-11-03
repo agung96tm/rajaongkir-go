@@ -13,7 +13,7 @@ package main
 
 import (
 	"fmt"
-	ongkir "github.com/kachit/rajaongkir-go"
+	ongkir "github.com/agung96tm/rajaongkir-go"
 )
 
 func main() {
@@ -25,23 +25,30 @@ func main() {
 	// --------------------------------------
 	// Provinces
 	// --------------------------------------
-	provRes, err := api.GetProvinces(nil)
+	provResp, err := api.GetProvinces(nil)
+	//provResp, err := api.GetProvinces(ongkir.ProvinceParams{ID: "1"})
+
 	if err != nil {
 		panic(err)
 	}
-	// provRes.GetStatus() { Code, Description }
-	// provRes.GetResults() []Province
+	
+	fmt.Println(provResp.Results)
+	// provResp.Status { Code, Description }
+	// provResp.Results []Province
 
 	// --------------------------------------
-	// City
+	// Cities
 	// --------------------------------------
-	cityRes, err := api.GetCities(nil)
+	citiesResp, err := api.GetCities(nil)
+	//citiesResp, err := api.GetCities(ongkir.CityParams{ID: "1", ProvinceID: "1"})
+
 	if err != nil {
 		panic(err)
 	}
-	// cityRes.GetStatus() { Code, Description }
-	// cityRes.GetResults() []Province
-
+	
+	fmt.Println(citiesResp.Results)
+	// citiesResp.Results []City
+	// citiesResp.Status { Code, Description }
 }
 ```
 

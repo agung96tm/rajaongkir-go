@@ -30,7 +30,7 @@ func toString(v reflect.Value) string {
 	}
 }
 
-func scan(i any, v url.Values) url.Values {
+func scan(i interface{}, v url.Values) url.Values {
 	e := reflect.ValueOf(i)
 
 	if e.Kind() == reflect.Pointer {
@@ -52,23 +52,9 @@ func scan(i any, v url.Values) url.Values {
 	return v
 }
 
-func querify(i any) string {
-	return scan(i, url.Values{}).Encode()
-}
-
-func urlValues(i any) url.Values {
+func urlValues(i interface{}) url.Values {
 	if i == nil {
 		return nil
 	}
 	return scan(i, url.Values{})
-}
-
-func addValues(vals url.Values, i any) url.Values {
-	if i == nil {
-		return vals
-	}
-	if vals == nil {
-		vals = make(url.Values)
-	}
-	return scan(i, vals)
 }
