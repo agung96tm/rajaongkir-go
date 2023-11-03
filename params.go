@@ -1,10 +1,10 @@
 package rajaongkir_go
 
 type ProvinceParams struct {
-	ID string `query:"id"`
+	ID string `query:"id" json:"id"`
 }
 
 type CityParams struct {
-	ID         string `query:"id"`
-	ProvinceID string `query:"province"`
+	ID         string `query:"id" json:"id"`
+	ProvinceID string `query:"province" json:"province"`
 }
