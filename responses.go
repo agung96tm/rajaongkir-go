@@ -56,3 +56,25 @@ type City struct {
 type ResponseCities struct {
 	ResponseBase[City, CityParams]
 }
+
+type Cost struct {
+	Value string `json:"value"`
+	Etd   string `json:"etd"`
+	Note  string `json:"note"`
+}
+
+type CourierCost struct {
+	Service     string `json:"service"`
+	Description string `json:"description"`
+	Cost        []Cost `json:"cost"`
+}
+
+type Courier struct {
+	Code  string        `json:"code"`
+	Name  string        `json:"name"`
+	Costs []CourierCost `json:"costs"`
+}
+
+type ResponseCost struct {
+	ResponseBase[Courier, CostParams]
+}

@@ -49,6 +49,20 @@ func main() {
 	fmt.Println(citiesResp.Results)
 	// citiesResp.Results []City
 	// citiesResp.Status { Code, Description }
+
+	// --------------------------------------
+	// Cost
+	// -------------------------------------- 
+	costResp, err := app.GetCost(&ongkir.CostParams{
+		Courier:     JNE,
+		Origin:      "501",
+		Destination: "114",
+		Weight:      1,
+	})
+	
+	fmt.Println(costResp.Results)
+	// costResp.Results []Courier
+	// costResp.Results[0].Courier {Code, Name, Costs}
 }
 ```
 

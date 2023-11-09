@@ -37,3 +37,18 @@ func (a API) GetCities(opts *CityParams) (ResponseCities, error) {
 	}
 	return respCities, nil
 }
+
+func (a API) GetCost(opts *CostParams) (ResponseCost, error) {
+	var respCost ResponseCost
+
+	respByte, err := post(a.config.BaseUrl, "cost", a.config.Header, urlValues(opts))
+	if err != nil {
+		return respCost, err
+	}
+
+	if err := respCost.Unmarshal(respByte); err != nil {
+		return respCost, err
+	}
+
+	return respCost, nil
+}

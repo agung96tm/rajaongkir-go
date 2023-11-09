@@ -9,8 +9,11 @@ type Config struct {
 
 func NewConfig(accountKey string, accountType string) Config {
 	return Config{
-		BaseUrl:     GetApiURL(accountType),
-		Header:      map[string]string{"key": accountKey},
+		BaseUrl: GetApiURL(accountType),
+		Header: map[string]string{
+			"key":          accountKey,
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
 		AccountKey:  accountKey,
 		AccountType: accountType,
 	}

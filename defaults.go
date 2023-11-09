@@ -9,3 +9,6 @@ const (
 	BasicAPIUrl   = "https://api.rajaongkir.com/basic"
 	ProAPIUrl     = "https://pro.rajaongkir.com/api"
 )
+
+const JNE = "jne"
+const TIKI = "tiki"
