@@ -12,3 +12,7 @@ const (
 
 const JNE = "jne"
 const TIKI = "tiki"
+const POS = "pos"
+const ESL = "esl"
+const PCP = "pcp"
+const RPX = "rpx"

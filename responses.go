@@ -36,6 +36,13 @@ func (b *ResponseBase[T, P]) Unmarshal(v []byte) error {
 	return nil
 }
 
+func (b *ResponseBase[T, P]) StatusValid() error {
+	if b.Status.Code >= 200 && b.Status.Code < 300 {
+		return nil
+	}
+	return errors.New(b.Status.Description)
+}
+
 type Province struct {
 	ProvinceID string `json:"province_id"`
 	Province   string `json:"province"`

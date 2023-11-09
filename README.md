@@ -54,7 +54,7 @@ func main() {
 	// Cost
 	// -------------------------------------- 
 	costResp, err := app.GetCost(&ongkir.CostParams{
-		Courier:     ongkir.JNE,
+		Courier:     JNE, // CouriersParams(JNE),
 		Origin:      "501",
 		Destination: "114",
 		Weight:      1,
