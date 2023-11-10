@@ -28,8 +28,6 @@ func (b *ResponseBase[T, P]) Unmarshal(v []byte) error {
 		var result T
 		if err := json.Unmarshal(rawNested["rajaongkir"]["results"], &result); err == nil {
 			b.Results = []T{result}
-		} else {
-			return errors.New("fail to parse json")
 		}
 	}
 
