@@ -6,7 +6,7 @@ import (
 )
 
 type ResponseStatus struct {
-	Code        uint   `json:"code"`
+	Code        int    `json:"code"`
 	Description string `json:"description"`
 }
 

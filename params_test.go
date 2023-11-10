@@ -13,12 +13,12 @@ type ParamsTestSuite struct {
 
 func (suite *ParamsTestSuite) TestProvinceParamsSuccess() {
 	urlValues := urlValues(ProvinceParams{ID: "1"})
-	assert.Equal(suite.T(), urlValues, url.Values{"id": {"1"}})
+	assert.Equal(suite.T(), url.Values{"id": {"1"}}, urlValues)
 }
 
 func (suite *ParamsTestSuite) TestCityParamsSuccess() {
 	urlValues := urlValues(CityParams{ID: "1", ProvinceID: "1"})
-	assert.Equal(suite.T(), urlValues, url.Values{"id": {"1"}, "province": {"1"}})
+	assert.Equal(suite.T(), url.Values{"id": {"1"}, "province": {"1"}}, urlValues)
 }
 
 func (suite *ParamsTestSuite) TestCostParamsSuccess() {
@@ -31,13 +31,13 @@ func (suite *ParamsTestSuite) TestCostParamsSuccess() {
 
 	assert.Equal(
 		suite.T(),
-		urlValues,
 		url.Values{
 			"origin":      {"1"},
 			"destination": {"1"},
 			"weight":      {"1"},
 			"courier":     {"jne"},
 		},
+		urlValues,
 	)
 }
 

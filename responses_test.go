@@ -12,124 +12,27 @@ type ResponsesTestSuite struct {
 
 func (suite *ResponsesTestSuite) TestProvinceSuccess() {
 	respProvince := ResponseProvinces{}
-	_ = respProvince.Unmarshal([]byte(`
-		{
-			"rajaongkir": {
-				"query": {
-					"id": "1"
-				},
-				"status": {
-					"code": 200,
-					"description": "OK"
-				},
-				"results": {
-					"province_id": "1",
-					"province": "Bali"
-				}
-			}
-		}
-	`))
-	assert.Equal(suite.T(), respProvince.Results[0].Province, "Bali")
-	assert.Equal(suite.T(), respProvince.Results[0].ProvinceID, "1")
-	assert.Equal(suite.T(), respProvince.StatusValid(), nil)
+	_ = respProvince.Unmarshal([]byte(TestResponseProvinceSuccess))
+	assert.Equal(suite.T(), "Bali", respProvince.Results[0].Province)
+	assert.Equal(suite.T(), "1", respProvince.Results[0].ProvinceID)
+	assert.Nil(suite.T(), respProvince.StatusValid())
 }
 
 func (suite *ResponsesTestSuite) TestCitySuccess() {
 	respCity := ResponseCities{}
-	_ = respCity.Unmarshal([]byte(`
-		{
-			"rajaongkir": {
-				"query": {
-					"id": "1"
-				},
-				"status": {
-					"code": 200,
-					"description": "OK"
-				},
-				"results": {
-					"city_id": "1",
-					"province_id": "21",
-					"province": "Nanggroe Aceh Darussalam (NAD)",
-					"type": "Kabupaten",
-					"city_name": "Aceh Barat",
-					"postal_code": "23681"
-				}
-			}
-		}
-	`))
-	assert.Equal(suite.T(), respCity.Results[0].Province, "Nanggroe Aceh Darussalam (NAD)")
-	assert.Equal(suite.T(), respCity.Results[0].CityID, "1")
-	assert.Equal(suite.T(), respCity.StatusValid(), nil)
+	_ = respCity.Unmarshal([]byte(TestResponseCitySuccess))
+	assert.Equal(suite.T(), "Nanggroe Aceh Darussalam (NAD)", respCity.Results[0].Province)
+	assert.Equal(suite.T(), "1", respCity.Results[0].CityID)
+	assert.Nil(suite.T(), respCity.StatusValid())
 }
 
 func (suite *ResponsesTestSuite) TestCostSuccess() {
 	respCost := ResponseCost{}
 
-	_ = respCost.Unmarshal([]byte(`
-		{
-			"rajaongkir": {
-				"query": {
-					"origin": 501,
-					"destination": "114",
-					"weight": 1,
-					"courier": "jne"
-				},
-				"status": {
-					"code": 200,
-					"description": "OK"
-				},
-				"origin_details": {
-					"city_id": "501",
-					"province_id": "5",
-					"province": "DI Yogyakarta",
-					"type": "Kota",
-					"city_name": "Yogyakarta",
-					"postal_code": "55111"
-				},
-				"destination_details": {
-					"city_id": "114",
-					"province_id": "1",
-					"province": "Bali",
-					"type": "Kota",
-					"city_name": "Denpasar",
-					"postal_code": "80227"
-				},
-				"results": [
-					{
-						"code": "jne",
-						"name": "Jalur Nugraha Ekakurir (JNE)",
-						"costs": [
-							{
-								"service": "OKE",
-								"description": "Ongkos Kirim Ekonomis",
-								"cost": [
-									{
-										"value": 27000,
-										"etd": "4-5",
-										"note": ""
-									}
-								]
-							},
-							{
-								"service": "REG",
-								"description": "Layanan Reguler",
-								"cost": [
-									{
-										"value": 31000,
-										"etd": "2-3",
-										"note": ""
-									}
-								]
-							}
-						]
-					}
-				]
-			}
-		}
-	`))
-	assert.Equal(suite.T(), respCost.Results[0].Code, "jne")
-	assert.Equal(suite.T(), len(respCost.Results[0].Costs), 2)
-	assert.Equal(suite.T(), respCost.StatusValid(), nil)
+	_ = respCost.Unmarshal([]byte(TestResponseCostSuccess))
+	assert.Equal(suite.T(), "jne", respCost.Results[0].Code)
+	assert.Equal(suite.T(), 1, len(respCost.Results[0].Costs))
+	assert.Nil(suite.T(), respCost.StatusValid())
 }
 
 func TestResponsesTestSuite(t *testing.T) {

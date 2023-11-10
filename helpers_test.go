@@ -40,7 +40,7 @@ func (suite *HelperTestSuite) TestScanSuccess() {
 	for i, tt := range testableScan {
 		result := scan(tt.i, tt.predefined)
 		if !reflect.DeepEqual(tt.expected, result) {
-			suite.FailNow("test #%d: result differs from expected value\n", i)
+			suite.T().Fatalf("test #%d: result differs from expected value\n", i)
 		}
 	}
 }
