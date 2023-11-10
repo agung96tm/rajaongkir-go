@@ -17,9 +17,9 @@ func (suite *ConfigTestSuite) SetupTest() {
 }
 
 func (suite *ConfigTestSuite) TestConfigValue() {
-	assert.Equal(suite.T(), TestBaseAPI, suite.testable.BaseUrl)
-	assert.Equal(suite.T(), TestAPIKey, suite.testable.AccountKey)
-	assert.Equal(suite.T(), TestAccountType, suite.testable.AccountType)
+	assert.Equal(suite.T(), suite.testable.BaseUrl, TestBaseAPI)
+	assert.Equal(suite.T(), suite.testable.AccountKey, TestAPIKey)
+	assert.Equal(suite.T(), suite.testable.AccountType, TestAccountType)
 }
 
 func (suite *ConfigTestSuite) TestGetAPIDefault() {
