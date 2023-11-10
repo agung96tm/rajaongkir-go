@@ -44,8 +44,8 @@ func (b *ResponseBase[T, P]) StatusValid() error {
 }
 
 type Province struct {
-	ProvinceID string `json:"province_id"`
-	Province   string `json:"province"`
+	ID       string `json:"province_id"`
+	Province string `json:"province"`
 }
 
 type ResponseProvinces struct {
@@ -53,7 +53,7 @@ type ResponseProvinces struct {
 }
 
 type City struct {
-	CityID     string `json:"city_id"`
+	ID         string `json:"city_id"`
 	City       string `json:"city_name"`
 	ProvinceID string `json:"province_id"`
 	Province   string `json:"province"`

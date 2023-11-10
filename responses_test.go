@@ -14,7 +14,7 @@ func (suite *ResponsesTestSuite) TestProvinceSuccess() {
 	respProvince := ResponseProvinces{}
 	_ = respProvince.Unmarshal([]byte(TestResponseProvinceSuccess))
 	assert.Equal(suite.T(), "Bali", respProvince.Results[0].Province)
-	assert.Equal(suite.T(), "1", respProvince.Results[0].ProvinceID)
+	assert.Equal(suite.T(), "1", respProvince.Results[0].ID)
 	assert.Nil(suite.T(), respProvince.StatusValid())
 }
 
@@ -22,7 +22,7 @@ func (suite *ResponsesTestSuite) TestCitySuccess() {
 	respCity := ResponseCities{}
 	_ = respCity.Unmarshal([]byte(TestResponseCitySuccess))
 	assert.Equal(suite.T(), "Nanggroe Aceh Darussalam (NAD)", respCity.Results[0].Province)
-	assert.Equal(suite.T(), "1", respCity.Results[0].CityID)
+	assert.Equal(suite.T(), "1", respCity.Results[0].ID)
 	assert.Nil(suite.T(), respCity.StatusValid())
 }
 
