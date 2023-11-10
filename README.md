@@ -31,7 +31,7 @@ func main() {
 	// Provinces
 	// --------------------------------------
 	provResp, err := api.GetProvinces(nil)
-	//provResp, err := api.GetProvinces(ongkir.ProvinceParams{ID: "1"})
+	//provResp, err := api.GetProvinces(&ongkir.ProvinceParams{ID: "1"})
 
 	if err != nil {
 		panic(err)
@@ -45,15 +45,15 @@ func main() {
 	// Cities
 	// --------------------------------------
 	citiesResp, err := api.GetCities(nil)
-	//citiesResp, err := api.GetCities(ongkir.CityParams{ID: "1", ProvinceID: "1"})
+	//citiesResp, err := api.GetCities(&ongkir.CityParams{ID: "1", ProvinceID: "1"})
 
 	if err != nil {
 		panic(err)
 	}
 	
 	fmt.Println(citiesResp.Results)
-	// citiesResp.Results []City
 	// citiesResp.Status { Code, Description }
+	// citiesResp.Results []City
 
 	// --------------------------------------
 	// Cost
