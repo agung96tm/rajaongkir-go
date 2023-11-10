@@ -1,6 +1,7 @@
 Rajakongkir Go
 =======================================
 [![Go Report Card](https://goreportcard.com/badge/github.com/agung96tm/rajaongkir-go)](https://goreportcard.com/report/github.com/agung96tm/rajaongkir-go)
+[![Codecov](https://codecov.io/gh/agung96tm/rajaongkir-go/branch/main/graph/badge.svg)](https://codecov.io/gh/agung96tm/rajaongkir-go)
 [![Version](https://img.shields.io/github/go-mod/go-version/agung96tm/rajaongkir-go)](https://go.dev/doc/go1.20)
 [![Release](https://img.shields.io/github/v/release/agung96tm/rajaongkir-go.svg)](https://github.com/agung96tm/rajaongkir-go/releases)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/agung96tm/rajaongkir-go/blob/master/LICENSE)
