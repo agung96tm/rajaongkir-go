@@ -34,6 +34,20 @@ func (suite *APITestSuite) TestGetProvinceSuccess() {
 	assert.Nil(suite.T(), err)
 }
 
+func (suite *APITestSuite) TestGetProvinceFail() {
+	httpmock.RegisterResponder(
+		http.MethodGet,
+		MockConfig.BaseUrl+"/province",
+		httpmock.NewBytesResponder(http.StatusBadRequest, []byte(TestResponseFail)),
+	)
+
+	resp, err := suite.testable.GetProvinces(nil)
+
+	assert.Equal(suite.T(), 400, resp.Status.Code)
+	assert.Nil(suite.T(), resp.Results)
+	assert.NotNil(suite.T(), err)
+}
+
 func (suite *APITestSuite) TestGetCitySuccess() {
 	httpmock.RegisterResponder(
 		http.MethodGet,
@@ -46,6 +60,20 @@ func (suite *APITestSuite) TestGetCitySuccess() {
 	assert.Equal(suite.T(), 200, resp.Status.Code)
 	assert.NotNil(suite.T(), resp.Results)
 	assert.Nil(suite.T(), err)
+}
+
+func (suite *APITestSuite) TestGetCityFail() {
+	httpmock.RegisterResponder(
+		http.MethodGet,
+		MockConfig.BaseUrl+"/city",
+		httpmock.NewBytesResponder(http.StatusBadRequest, []byte(TestResponseFail)),
+	)
+
+	resp, err := suite.testable.GetCities(nil)
+
+	assert.Equal(suite.T(), 400, resp.Status.Code)
+	assert.Nil(suite.T(), resp.Results)
+	assert.NotNil(suite.T(), err)
 }
 
 func (suite *APITestSuite) TestGetCostSuccess() {
@@ -65,6 +93,25 @@ func (suite *APITestSuite) TestGetCostSuccess() {
 	assert.Equal(suite.T(), 200, resp.Status.Code)
 	assert.NotNil(suite.T(), resp.Results)
 	assert.Nil(suite.T(), err)
+}
+
+func (suite *APITestSuite) TestGetCostFail() {
+	httpmock.RegisterResponder(
+		http.MethodPost,
+		MockConfig.BaseUrl+"/cost",
+		httpmock.NewBytesResponder(http.StatusOK, []byte(TestResponseFail)),
+	)
+
+	resp, err := suite.testable.GetCost(&CostParams{
+		Origin:      "1",
+		Destination: "1",
+		Weight:      1,
+		Courier:     JNE,
+	})
+
+	assert.Equal(suite.T(), 400, resp.Status.Code)
+	assert.Nil(suite.T(), resp.Results)
+	assert.NotNil(suite.T(), err)
 }
 
 func (suite *APITestSuite) TearDownTest() {

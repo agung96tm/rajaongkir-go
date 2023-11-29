@@ -41,6 +41,11 @@ func (suite *ParamsTestSuite) TestCostParamsSuccess() {
 	)
 }
 
+func (suite *ParamsTestSuite) TestCourierParamsSuccess() {
+	result := CourierParams("JNE", "TIKI")
+	assert.Equal(suite.T(), "JNE:TIKI", result)
+}
+
 func TestParamsTestSuite(t *testing.T) {
 	suite.Run(t, new(ParamsTestSuite))
 }

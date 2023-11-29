@@ -14,8 +14,11 @@ type scanTest struct {
 }
 
 type MockHelperScan struct {
-	FooBar string `query:"foo_bar"`
-	Bar    string `query:"bar"`
+	MockInt   int      `query:"mock_int"`
+	MockStr   string   `query:"mock_str"`
+	MockFloat float64  `query:"mock_float"`
+	MockBool  bool     `query:"mock_bool"`
+	MockArr   []string `query:"mock_arr"`
 }
 
 type HelperTestSuite struct {
@@ -26,13 +29,19 @@ func (suite *HelperTestSuite) TestScanSuccess() {
 	testableScan := []scanTest{
 		{
 			i: MockHelperScan{
-				FooBar: "foo bar",
-				Bar:    "bar",
+				MockInt:   666,
+				MockStr:   "bar",
+				MockFloat: 10.2,
+				MockBool:  true,
+				MockArr:   []string{"one", "two", "three"},
 			},
 			predefined: url.Values{},
 			expected: url.Values{
-				"foo_bar": {"foo bar"},
-				"bar":     {"bar"},
+				"mock_int":   {"666"},
+				"mock_str":   {"bar"},
+				"mock_float": {"10.2"},
+				"mock_bool":  {"true"},
+				"mock_arr":   {`["one","two","three"]`},
 			},
 		},
 	}
