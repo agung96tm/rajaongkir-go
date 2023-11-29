@@ -22,9 +22,21 @@ func (suite *ConfigTestSuite) TestConfigValue() {
 	assert.Equal(suite.T(), suite.testable.AccountType, TestAccountType)
 }
 
-func (suite *ConfigTestSuite) TestGetAPIDefault() {
-	result := GetApiURL("wrongType")
-	assert.Equal(suite.T(), result, TestBaseAPI) // StarterURL
+func (suite *ConfigTestSuite) TestGetAPISuccess() {
+	typeTest := []struct {
+		accountType string
+		url         string
+	}{
+		{AccountStarter, StarterAPIUrl},
+		{AccountPro, ProAPIUrl},
+		{AccountBasic, BasicAPIUrl},
+		{"wrong", StarterAPIUrl},
+	}
+
+	for _, tt := range typeTest {
+		result := GetApiURL(tt.accountType)
+		assert.Equal(suite.T(), result, tt.url)
+	}
 }
 
 func TestConfigTestSuite(t *testing.T) {

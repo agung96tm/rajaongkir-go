@@ -24,6 +24,17 @@ const TestResponseProvinceSuccess = `
 }
 `
 
+const TestResponseFail = `
+{
+    "rajaongkir": {
+        "status": {
+            "code": 400,
+            "description": "Invalid key. API key tidak ditemukan di database RajaOngkir."
+        }
+    }
+}
+`
+
 const TestResponseCitySuccess = `
 	{
 		"rajaongkir": {
